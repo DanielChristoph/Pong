@@ -95,6 +95,14 @@ public class ErgebnisPanel extends JPanel {
 		return doppel;
 	}
 	
-	
+	/**
+	 * Resetet das Ergebnispanel
+	 */
+	public void reset(){
+		
+		this.getErg(1).setText("0");
+		this.getErg(2).setText("0");
+		
+	}
 	
 }

@@ -100,6 +100,9 @@ public class FensterFrame extends JFrame implements KeyListener{
 	private void neuesSpiel(){
 		
 		this.ball.init();
+		
+		this.getErgebnis().reset();
+		
 		this.ballThread = new Thread(this.getBall());
 		this.ballThread.start();
 		
