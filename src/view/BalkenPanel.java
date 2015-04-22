@@ -90,7 +90,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 		try {
 			Thread.sleep(10);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			System.out.println("Balken sleep fail");
 		}
 		
 		if(this.schrittweite != 0)

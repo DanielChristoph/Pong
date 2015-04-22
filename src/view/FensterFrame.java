@@ -30,7 +30,10 @@ public class FensterFrame extends JFrame implements KeyListener{
 	private BalkenPanel[] 	spieler 	= new BalkenPanel[3];
 	private ErgebnisPanel	ergebnis 	= null;
 	private BallPanel 		ball 	 	= null;
-	public  Thread 			ballThread = null;
+	
+	public  Thread 			ballThread  	= null;
+	public  Thread 			spieler1Thread  = null;
+	public  Thread 			spieler2Thread  = null;
 	
 	public int BalkenPanelAbstand = 20;
 	
@@ -41,14 +44,7 @@ public class FensterFrame extends JFrame implements KeyListener{
 		
 		init();
 		
-		ballThread = new Thread(this.getBall());
-		ballThread.start();
-		
-		Thread sp1 = new Thread(this.getSpieler(1));
-		sp1.start();
-		
-		Thread sp2 = new Thread(this.getSpieler(2));
-		sp2.start();
+		initThreads();
 		
 	}
 	
@@ -66,6 +62,19 @@ public class FensterFrame extends JFrame implements KeyListener{
 		hinzufuegenElemente();
 		
 		addKeyListener(this);		
+	}
+	
+	private void initThreads(){
+		
+		this.ballThread = new Thread(this.getBall());
+		this.ballThread.start();
+		
+		this.spieler1Thread = new Thread(this.getSpieler(1));
+		this.spieler1Thread.start();
+		
+		this.spieler2Thread = new Thread(this.getSpieler(2));
+		this.spieler2Thread.start();
+		
 	}
 	
 	private void hinzufuegenElemente(){

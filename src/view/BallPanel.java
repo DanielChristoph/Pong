@@ -77,7 +77,7 @@ public class BallPanel extends JPanel implements Runnable{
 		try {
 			Thread.sleep(pause);
 		} catch (InterruptedException e) {
-			e.printStackTrace();
+			System.out.println("Ball sleep fail");
 		}
 		
 		switch(richtung){
@@ -238,7 +238,9 @@ public class BallPanel extends JPanel implements Runnable{
 				
 				this.fenster.getView().getPresenter().sieg(spieler);
 				this.fenster.getErgebnis().getErg(spieler).setText(this.fenster.getView().getPresenter().getPunkte(spieler) + "");
+				
 				this.fenster.ballThread.interrupt();
+				
 				return false;
 				
 			}
