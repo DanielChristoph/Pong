@@ -5,30 +5,60 @@ import java.util.Random;
 
 import javax.swing.JPanel;
 
+/**
+ * Klasse BallPanel - Ball der im Fenster dargestellt wird
+ * 
+ * @author		C.Teipen
+ * @version		22.04.2015
+ */
 public class BallPanel extends JPanel implements Runnable{
 
 	private static final long serialVersionUID = -4071397231696900457L;
 
+	// Fenster in dem der Balken angezeigt wird
 	private FensterFrame fenster = null;
 	
+	// Farbe des Balls
 	private Color farbe = Color.WHITE;
+	
+	// Da quadratisch nur eine Längenangabe
 	private int groesse = 20;
+	
+	// Pause die nach jedem Schritt vom Ball gemacht wird
 	private int pause = 25;
+	
+	// Pixel die sich der Ball pro Schritt bewegt
 	private int schrittweite = 5;
 	
+	// Was auch immer - Abstand von Oben
 	private int wai = 29;
 	
+	/**
+	 * Konstruktor des Balls mit Übergabe des Fensters in dem er dargestellt wird
+	 * 
+	 * @param fenster
+	 */
 	public BallPanel(FensterFrame fenster) {
+		
 		super();
+		
 		this.fenster = fenster;
 		this.setBackground(farbe);
-		this.setSize(groesse, groesse);
+		
+		this.init();
+		
 	}
 	
+	/**
+	 * Inistialisiert den Ball
+	 */
 	public void init(){
 		
+		this.setSize(groesse, groesse);
+		
 		Random rand = new Random();
-		this.setLocation((this.fenster.getWidth() / 2) - (this.getWidth() / 2), rand.nextInt(this.fenster.getHeight() - this.getHeight()) + this.getHeight());
+		this.setLocation((this.fenster.getWidth() / 2) - (this.getWidth() / 2), 
+				rand.nextInt(this.fenster.getHeight() - this.getHeight()) + this.getHeight());
 		
 	}
 	
@@ -47,7 +77,6 @@ public class BallPanel extends JPanel implements Runnable{
 		try {
 			Thread.sleep(pause);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
@@ -76,15 +105,15 @@ public class BallPanel extends JPanel implements Runnable{
 	 */
 	public void moveOL(){
 		
-		if(this.getX() - this.fenster.BalkenPanelAbstand >= schrittweite && this.getY() >= schrittweite){
+		if(this.getX() - (this.fenster.BalkenPanelAbstand + this.fenster.getSpieler(1).getWidth()) >= schrittweite && this.getY() >= schrittweite){
 			
 			this.setLocation(this.getX() - schrittweite, this.getY() - schrittweite);
 
 		}
 		
-		if(this.getX() - this.fenster.BalkenPanelAbstand < schrittweite){
+		if(this.getX() - (this.fenster.BalkenPanelAbstand + this.fenster.getSpieler(1).getWidth()) < schrittweite){
 			
-			if(isTouched(1))
+			if(balkenBeruehrt(1))
 			this.move(1);
 			
 		}else if(this.getY() < schrittweite){
@@ -103,16 +132,16 @@ public class BallPanel extends JPanel implements Runnable{
 	 */
 	public void moveOR(){
 
-		if(this.getX() + this.groesse + schrittweite <= this.fenster.getWidth() - this.fenster.BalkenPanelAbstand
+		if(this.getX() + this.groesse + schrittweite <= this.fenster.getWidth() - (this.fenster.BalkenPanelAbstand + this.fenster.getSpieler(2).getWidth())
 				&& this.getY() >= schrittweite){
 			
 			this.setLocation(this.getX() + schrittweite, this.getY() - schrittweite);
 			
 		}
 		
-		if(this.getX() + this.groesse + schrittweite > this.fenster.getWidth() - this.fenster.BalkenPanelAbstand){
+		if(this.getX() + this.groesse + schrittweite > this.fenster.getWidth() - (this.fenster.BalkenPanelAbstand + this.fenster.getSpieler(2).getWidth())){
 			
-			if(isTouched(2))
+			if(balkenBeruehrt(2))
 			this.move(0);
 			
 		}else if(this.getY() < schrittweite){
@@ -131,16 +160,16 @@ public class BallPanel extends JPanel implements Runnable{
 	 */
 	public void moveUL(){
 		
-		if(this.getX() - this.fenster.BalkenPanelAbstand >= schrittweite
+		if(this.getX() - (this.fenster.BalkenPanelAbstand + this.fenster.getSpieler(1).getWidth()) >= schrittweite
 				&& this.getY() + this.groesse + schrittweite <= this.fenster.getHeight() - wai){
 			
 			this.setLocation(this.getX() - schrittweite, this.getY() + schrittweite);			
 			
 		}
 		
-		if(this.getX() - this.fenster.BalkenPanelAbstand < schrittweite){
+		if(this.getX() - (this.fenster.BalkenPanelAbstand + this.fenster.getSpieler(1).getWidth()) < schrittweite){
 			
-			if(isTouched(1))
+			if(balkenBeruehrt(1))
 			this.move(3);
 			
 		}else if(this.getY() + this.groesse + schrittweite > this.fenster.getHeight() - wai){
@@ -160,16 +189,16 @@ public class BallPanel extends JPanel implements Runnable{
 	 */
 	public void moveUR(){
 		
-		if(this.getX() + this.groesse + schrittweite <= this.fenster.getWidth() - this.fenster.BalkenPanelAbstand
+		if(this.getX() + this.groesse + schrittweite <= this.fenster.getWidth() - (this.fenster.BalkenPanelAbstand + this.fenster.getSpieler(2).getWidth())
 				&& this.getY() + this.groesse + schrittweite <= this.fenster.getHeight() -wai){
 			
 			this.setLocation(this.getX() + schrittweite, this.getY() + schrittweite);
 			
 		}
 		
-		if(this.getX() + this.groesse + schrittweite > this.fenster.getWidth() - this.fenster.BalkenPanelAbstand){
+		if(this.getX() + this.groesse + schrittweite > this.fenster.getWidth() - (this.fenster.BalkenPanelAbstand + this.fenster.getSpieler(2).getWidth())){
 			
-			if(isTouched(2))			
+			if(balkenBeruehrt(2))			
 			this.move(2);
 			
 		}else if(this.getY() + this.groesse + schrittweite > this.fenster.getHeight() - wai){
@@ -183,43 +212,47 @@ public class BallPanel extends JPanel implements Runnable{
 		}
 	}
 
-	private boolean isTouched(int spieler){
+	/**
+	 * Überprüft ob der Ball einen Spielerbalken berührt hat, oder ob die Spielrunde vorbei ist
+	 * Wenn die Spielrunde vorbei ist bekommt der Spieler der gewonnen hat einen Punkt
+	 * 
+	 * @param	spieler - Balken der berührt worden sein soll
+	 * @return	Hat der Ball den Balken berührt?
+	 */
+	private boolean balkenBeruehrt(int spieler){
 		
-		if(spieler == 1){
+		if(spieler == 1 || spieler == 2){
 			
-			if(this.getY() >= this.fenster.getSpieler1().getY() 
-					&& this.getY() + this.getHeight() <= this.fenster.getSpieler1().getY() + this.fenster.getSpieler1().getHeight()){
+			if(this.getY() >= this.fenster.getSpieler(spieler).getY() 
+					&& this.getY() + this.getHeight() <= this.fenster.getSpieler(spieler).getY() + this.fenster.getSpieler(spieler).getHeight()){
 				
 				return true;
 				
 			}else{
 				
-				this.fenster.getView().getPresenter().getModel().getSpiel().getSpieler(2).sieg();
-				this.fenster.getErgebnis().getErg2().setText(this.fenster.getView().getPresenter().getModel().getSpiel().getSpieler(2).getPunkte() + "");
+				if(spieler == 1){
+					spieler = 2;
+				}else{
+					spieler = 1;
+				}
+				
+				this.fenster.getView().getPresenter().sieg(spieler);
+				this.fenster.getErgebnis().getErg(spieler).setText(this.fenster.getView().getPresenter().getPunkte(spieler) + "");
 				this.fenster.ballThread.interrupt();
 				return false;
 				
 			}
 			
-		}else{
-			
-			if(this.getY() >= this.fenster.getSpieler2().getY() 
-					&& this.getY() + this.getHeight() <= this.fenster.getSpieler2().getY() + this.fenster.getSpieler2().getHeight()){
-				
-				return true;
-			
-			}else{
-				
-				this.fenster.getView().getPresenter().getModel().getSpiel().getSpieler(1).sieg();
-				this.fenster.getErgebnis().getErg1().setText(this.fenster.getView().getPresenter().getModel().getSpiel().getSpieler(1).getPunkte() + "");
-				this.fenster.ballThread.interrupt();
-				return false;
-			
-			}
 		}
+		
+		return false;
 		
 	}
 	
+	/**
+	 * Bewegt den Ball permanent auf der Oberfläche bis der Thread gestoppt wurde
+	 * Startrichtung wird zufällig gewählt
+	 */
 	@Override
 	public void run() {
 

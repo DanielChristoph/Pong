@@ -4,10 +4,17 @@ import java.awt.Color;
 
 import javax.swing.JPanel;
 
+/**
+ * Klasse BalkenPanel - Spielbalken der Oberfläche
+ * 
+ * @author		C.Teipen
+ * @version		22.04.2015
+ */
 public class BalkenPanel extends JPanel implements Runnable{
 
 	private static final long serialVersionUID = -3527165548569866458L;
 
+	// Fenster in dem der Balken angezeigt wird
 	private FensterFrame fenster = null;
 	
 	// Höhe und Breite
@@ -17,7 +24,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 	// Panel Farbe
 	private Color farbe = Color.WHITE;
 	
-	// Panel Schrittweite
+	// Schrittweite und sein Standardwert
 	private int defaultSchritt = 10;
 	private int schrittweite = 0;
 	
@@ -25,8 +32,18 @@ public class BalkenPanel extends JPanel implements Runnable{
 	private int hoch = 0;
 	private int runter = 0;
 	
+	// Was auch immer - Abstand von Oben
 	private int wai = 29;
 	
+	/**
+	 * Konstruktor
+	 * Initialisierung des Fensters
+	 * Tasten zum bewegen (hoch, runter)
+	 * 
+	 * @param fenster
+	 * @param hoch
+	 * @param runter
+	 */
 	public BalkenPanel(FensterFrame fenster, int hoch, int runter) {
 		
 		super();
@@ -35,37 +52,60 @@ public class BalkenPanel extends JPanel implements Runnable{
 		this.hoch = hoch;
 		this.runter = runter;
 		
+		this.init();
+		
+	}
+	
+	/**
+	 * Initialisierung der Farbe und Größe
+	 */
+	private void init(){
+		
 		this.setBackground(this.farbe);
 		this.setSize(this.breite, this.hoehe);
 		
 	}
 	
-	private void doMove(){
+	/**
+	 * Bewegt den Balken abhängig von der Variable <code>schrittweite</code>
+	 */
+	private void bewegeBalken(){
 		
+		// Wenn hoch und noch nicht oben angelangt
 		if(this.schrittweite < 0 && this.getY() > 0)
 		this.setLocation(this.getX(), this.getY() + this.schrittweite);
 		
+		// Wenn runter und noch nicht unten angelangt
 		if(this.schrittweite > 0 && this.getY() + this.getHeight() < this.fenster.getHeight() - this.wai)
 		this.setLocation(this.getX(), this.getY() + this.schrittweite);
 		
 	}
 	
-	public void move(){
+	/**
+	 * Bewegt den Balken mit Delay von 10ms und nur wenn <code>schrittweite</code> ungleich 0
+	 * Ruft sich danach selber auf
+	 */
+	public void bewegen(){
 		
 		try {
 			Thread.sleep(10);
 		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		if(this.schrittweite != 0)
-			this.doMove();
+			this.bewegeBalken();
 		
-		this.move();
+		this.bewegen();
 		
 	}
 	
+	/**
+	 * Die übergebene Taste bestimmt den Wert den <code>schrittweite</code> bekommt.
+	 * Dieser überprüft ob <code>hoch</code> oder <code>runter</code> gedrückt wurde.
+	 * 
+	 * @param taste - gedrückte Taste
+	 */
 	public void pressed(int taste){
 		
 		if(taste == hoch){
@@ -78,16 +118,22 @@ public class BalkenPanel extends JPanel implements Runnable{
 		
 	}
 	
+	/**
+	 * Aufruf beim loslassen der gedrückten Taste
+	 */
 	public void released(){
 		
 		this.schrittweite = 0;
 		
 	}
 
+	/**
+	 * Der Balken bewegt sich durchgängig. Es variiert nur die <code>schrittweite</code>.
+	 */
 	@Override
 	public void run() {
 
-		this.move();
+		this.bewegen();
 		
 	}
 	

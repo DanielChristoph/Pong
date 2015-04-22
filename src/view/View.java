@@ -10,7 +10,7 @@ public class View {
 	
 	public View() {
 		
-		this.getFenster();		
+		this.getFenster();	
 	}
 	
 	public void setPresenter(Presenter presenter){

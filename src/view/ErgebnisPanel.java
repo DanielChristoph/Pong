@@ -18,9 +18,8 @@ public class ErgebnisPanel extends JPanel {
 	private Color bgcolor = Color.BLACK;
 	
 	// Ergebnisse
-	private JLabel erg1 = null;
+	private JLabel[] erg = new JLabel[3];
 	private JLabel doppel = null;
-	private JLabel erg2 = null;
 	
 	// Font Eigenschaften
 	private int fontsize = 32;
@@ -39,23 +38,23 @@ public class ErgebnisPanel extends JPanel {
 		this.setBackground(bgcolor);
 		this.setSize(WIDTH, HEIGHT);
 		
-		this.add(getErg1());
+		this.add(getErg(1));
 		this.add(getDoppel());
-		this.add(getErg2());
+		this.add(getErg(2));
 				
 	}
 
-	public JLabel getErg1() {
+	public JLabel getErg(int spieler) {
 		
-		if(erg1 == null){
+		if(this.erg[spieler] == null){
 			
-			erg1 = new JLabel("0");
-			erg1.setForeground(farbe);
-			erg1.setFont(new Font(schrift, Font.BOLD, fontsize));
+			this.erg[spieler] = new JLabel("0");
+			this.erg[spieler].setForeground(farbe);
+			this.erg[spieler].setFont(new Font(schrift, Font.BOLD, fontsize));
 			
 		}
 		
-		return erg1;
+		return this.erg[spieler];
 	}
 
 	public JLabel getDoppel() {
@@ -71,19 +70,6 @@ public class ErgebnisPanel extends JPanel {
 		}
 		
 		return doppel;
-	}
-
-	public JLabel getErg2() {
-		
-		if(erg2 == null){
-			
-			erg2 = new JLabel("0");
-			erg2.setForeground(farbe);
-			erg2.setFont(new Font(schrift, Font.BOLD, fontsize));
-			
-		}
-		
-		return erg2;
 	}
 	
 	

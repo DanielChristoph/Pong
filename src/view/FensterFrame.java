@@ -3,6 +3,7 @@ package view;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.swing.JFrame;
 
@@ -26,10 +27,9 @@ public class FensterFrame extends JFrame implements KeyListener{
 	/**
 	 * Es folgen die programmbezogenen Komponenten
 	 */
-	private BalkenPanel 	spieler1 = null;
-	private BalkenPanel 	spieler2 = null;
-	private ErgebnisPanel 	ergebnis = null;
-	private BallPanel 		ball 	 = null;
+	private BalkenPanel[] 	spieler 	= new BalkenPanel[3];
+	private ErgebnisPanel	ergebnis 	= null;
+	private BallPanel 		ball 	 	= null;
 	
 	public Thread 			ballThread = null;
 	
@@ -45,10 +45,10 @@ public class FensterFrame extends JFrame implements KeyListener{
 		ballThread = new Thread(this.getBall());
 		ballThread.start();
 		
-		Thread sp1 = new Thread(this.spieler1);
+		Thread sp1 = new Thread(this.getSpieler(1));
 		sp1.start();
 		
-		Thread sp2 = new Thread(this.spieler2);
+		Thread sp2 = new Thread(this.getSpieler(2));
 		sp2.start();
 		
 	}
@@ -71,13 +71,13 @@ public class FensterFrame extends JFrame implements KeyListener{
 	
 	private void hinzufuegenElemente(){
 		
-		this.spieler1 = new BalkenPanel(this, KeyEvent.VK_W, KeyEvent.VK_S);
-		this.add(this.spieler1);
-		this.spieler1.setLocation(BalkenPanelAbstand, (this.HEIGHT / 2) - (this.spieler1.getHeight() / 2));
+		this.spieler[1] = new BalkenPanel(this, KeyEvent.VK_W, KeyEvent.VK_S);
+		this.add(this.getSpieler(1));
+		this.getSpieler(1).setLocation(BalkenPanelAbstand, (this.HEIGHT / 2) - (this.getSpieler(1).getHeight() / 2));
 		
-		this.spieler2 = new BalkenPanel(this, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
-		this.add(this.spieler2);
-		this.spieler2.setLocation(this.WIDTH - this.spieler2.getWidth() - BalkenPanelAbstand, (this.HEIGHT / 2) - (this.spieler1.getHeight() / 2));
+		this.spieler[2] = new BalkenPanel(this, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
+		this.add(this.getSpieler(2));
+		this.getSpieler(2).setLocation(this.WIDTH - this.getSpieler(2).getWidth() - BalkenPanelAbstand, (this.HEIGHT / 2) - (this.getSpieler(2).getHeight() / 2));
 		
 		this.ball = new BallPanel(this);
 		this.add(this.ball);
@@ -101,12 +101,21 @@ public class FensterFrame extends JFrame implements KeyListener{
 		return this.view;
 	}
 	
-	public BalkenPanel getSpieler1() {
-		return spieler1;
-	}
-
-	public BalkenPanel getSpieler2() {
-		return spieler2;
+	public BalkenPanel getSpieler(int spieler) {
+		
+		if(spieler == 1){
+			
+			return this.spieler[1];		
+			
+		}else if(spieler == 2){
+			
+			return this.spieler[2];
+			
+		}else{
+			
+			return null;
+			
+		}
 	}
 
 	public ErgebnisPanel getErgebnis() {
@@ -119,14 +128,14 @@ public class FensterFrame extends JFrame implements KeyListener{
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		this.spieler1.pressed(e.getKeyCode());
-		this.spieler2.pressed(e.getKeyCode());
+		this.getSpieler(1).pressed(e.getKeyCode());
+		this.getSpieler(2).pressed(e.getKeyCode());
 	}
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		this.spieler1.released();
-		this.spieler2.released();
+		this.getSpieler(1).released();
+		this.getSpieler(2).released();
 	}
 
 	@Override
