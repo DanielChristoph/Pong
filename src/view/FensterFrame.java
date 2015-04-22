@@ -30,8 +30,7 @@ public class FensterFrame extends JFrame implements KeyListener{
 	private BalkenPanel[] 	spieler 	= new BalkenPanel[3];
 	private ErgebnisPanel	ergebnis 	= null;
 	private BallPanel 		ball 	 	= null;
-	
-	public Thread 			ballThread = null;
+	public  Thread 			ballThread = null;
 	
 	public int BalkenPanelAbstand = 20;
 	

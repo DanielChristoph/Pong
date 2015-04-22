@@ -198,7 +198,7 @@ public class BallPanel extends JPanel implements Runnable{
 		
 		if(this.getX() + this.groesse + schrittweite > this.fenster.getWidth() - (this.fenster.BalkenPanelAbstand + this.fenster.getSpieler(2).getWidth())){
 			
-			if(balkenBeruehrt(2))			
+			if(balkenBeruehrt(2))		
 			this.move(2);
 			
 		}else if(this.getY() + this.groesse + schrittweite > this.fenster.getHeight() - wai){
@@ -223,8 +223,8 @@ public class BallPanel extends JPanel implements Runnable{
 		
 		if(spieler == 1 || spieler == 2){
 			
-			if(this.getY() >= this.fenster.getSpieler(spieler).getY() 
-					&& this.getY() + this.getHeight() <= this.fenster.getSpieler(spieler).getY() + this.fenster.getSpieler(spieler).getHeight()){
+			if(this.getY() >= this.fenster.getSpieler(spieler).getY() - this.getHeight() - 1
+					&& this.getY() + this.getHeight() <= this.fenster.getSpieler(spieler).getY() + this.fenster.getSpieler(spieler).getHeight() + this.getHeight() - 1){
 				
 				return true;
 				

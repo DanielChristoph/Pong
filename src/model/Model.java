@@ -40,12 +40,14 @@ public class Model {
 			
 			return this.spieler1;
 			
-		}else if(spieler == 1){
+		}else if(spieler == 2){
 			
 			return this.spieler2;
 			
 		}else{
+			
 			return null;
+			
 		}
 		
 	}
