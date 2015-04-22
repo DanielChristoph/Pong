@@ -128,19 +128,19 @@ public class FensterFrame extends JFrame implements KeyListener{
 		
 		this.ball.init();
 		
+		this.getErgebnis().reset();
+
 		this.ballThread = new Thread(this.getBall());
 		this.ballThread.start();
 		
 	}
 	
 	/**
-	 * Setz die View zurück
+	 * Startet eine neue Spielrunde
 	 */
-	public void resetView(){
+	public void neueSpielrunde(){
 		
 		this.ball.init();
-		
-		this.getErgebnis().reset();
 		
 		this.ballThread = new Thread(this.getBall());
 		this.ballThread.start();
@@ -222,7 +222,7 @@ public class FensterFrame extends JFrame implements KeyListener{
 	public void keyTyped(KeyEvent e) {
 		
 		if(!ballThread.isAlive() && e.getKeyChar() == ' ')
-			this.neuesSpiel();
+			this.neueSpielrunde();
 		
 	}
 		
