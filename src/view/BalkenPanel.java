@@ -44,7 +44,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 	 * @param hoch
 	 * @param runter
 	 */
-	public BalkenPanel(FensterFrame fenster, int hoch, int runter) {
+	public BalkenPanel(FensterFrame fenster, int hoch, int runter, int spieler) {
 		
 		super();
 		
@@ -52,17 +52,27 @@ public class BalkenPanel extends JPanel implements Runnable{
 		this.hoch = hoch;
 		this.runter = runter;
 		
-		this.init();
+		this.init(spieler);
 		
 	}
 	
 	/**
 	 * Initialisierung der Farbe und Größe
 	 */
-	private void init(){
+	private void init(int spieler){
 		
 		this.setBackground(this.farbe);
 		this.setSize(this.breite, this.hoehe);
+		
+		if(spieler == 1){
+			
+			this.setLocation(this.fenster.BalkenPanelAbstand, (this.fenster.getHeight() / 2) - (this.getHeight() / 2));
+		
+		}else{
+			
+			this.setLocation(this.fenster.getWidth() - this.getWidth() - this.fenster.BalkenPanelAbstand, (this.fenster.getHeight() / 2) - (this.getHeight() / 2));
+			
+		}
 		
 	}
 	

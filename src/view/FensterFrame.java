@@ -103,13 +103,11 @@ public class FensterFrame extends JFrame implements KeyListener{
 	 */
 	private void hinzufuegenElemente(){
 		
-		this.spieler[1] = new BalkenPanel(this, KeyEvent.VK_W, KeyEvent.VK_S);
+		this.spieler[1] = new BalkenPanel(this, KeyEvent.VK_W, KeyEvent.VK_S, 1);
 		this.add(this.getSpieler(1));
-		this.getSpieler(1).setLocation(BalkenPanelAbstand, (this.HEIGHT / 2) - (this.getSpieler(1).getHeight() / 2));
 		
-		this.spieler[2] = new BalkenPanel(this, KeyEvent.VK_UP, KeyEvent.VK_DOWN);
+		this.spieler[2] = new BalkenPanel(this, KeyEvent.VK_UP, KeyEvent.VK_DOWN, 2);
 		this.add(this.getSpieler(2));
-		this.getSpieler(2).setLocation(this.WIDTH - this.getSpieler(2).getWidth() - BalkenPanelAbstand, (this.HEIGHT / 2) - (this.getSpieler(2).getHeight() / 2));
 		
 		this.ball = new BallPanel(this);
 		this.add(this.ball);
