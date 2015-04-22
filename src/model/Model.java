@@ -51,5 +51,10 @@ public class Model {
 		}
 		
 	}
+	
+	public void reset() {
+		this.spieler1.setPunkte(0);
+		this.spieler2.setPunkte(0);
+	}
 
 }

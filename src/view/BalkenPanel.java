@@ -59,7 +59,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 	/**
 	 * Initialisierung der Farbe und Größe
 	 */
-	private void init(int spieler){
+	public void init(int spieler){
 		
 		this.setBackground(this.farbe);
 		this.setSize(this.breite, this.hoehe);

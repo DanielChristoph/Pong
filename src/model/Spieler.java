@@ -1,5 +1,7 @@
 package model;
 
+import javax.swing.JOptionPane;
+
 /**
  * Klasse Spieler
  * 
@@ -29,9 +31,7 @@ public class Spieler {
 	 * Bei Aufruf wird die Punktanzahl um 1 hochgezählt
 	 */
 	public void sieg(){
-		
-		this.punkte++;
-		
+		this.punkte++;		
 	}
 	
 	/**
@@ -42,6 +42,17 @@ public class Spieler {
 	public int getPunkte() {
 		
 		return this.punkte;
+	
+	}
+	
+	/**
+	 * Setzt die Anzahl der Punkte
+	 * 
+	 * @return punkte
+	 */
+	public void setPunkte(int punkte) {
+		
+		this.punkte = punkte;
 	
 	}
 

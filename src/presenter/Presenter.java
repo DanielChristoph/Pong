@@ -1,5 +1,7 @@
 package presenter;
 
+import javax.swing.JOptionPane;
+
 import model.Model;
 import view.View;
 
@@ -81,7 +83,13 @@ public class Presenter {
 	public void sieg(int spieler){
 		
 		getModel().getSpieler(spieler).sieg();
-		
+		if (getModel().getSpieler(spieler).getPunkte() == 10) {
+			JOptionPane.showMessageDialog(null, getModel().getSpieler(spieler).getNickname() + " hat gewonnen", "Gewonnen", JOptionPane.INFORMATION_MESSAGE);
+			this.view.getFenster().neuesSpiel();
+			this.model.reset();
+			this.view.getFenster().getSpieler(1).init(1);
+			this.view.getFenster().getSpieler(2).init(2);
+		}
 	}
 	
 	/**
