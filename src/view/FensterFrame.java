@@ -7,10 +7,17 @@ import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.swing.JFrame;
 
+/**
+ * Hauptfenster der GUI
+ * 
+ * @author		C.Teipen
+ * @version		22.04.2015
+ */
 public class FensterFrame extends JFrame implements KeyListener{
 
 	private static final long serialVersionUID = 8065773938646050109L;
 	
+	// View
 	private View view = null;
 	
 	// Titel
@@ -24,19 +31,24 @@ public class FensterFrame extends JFrame implements KeyListener{
 	// Hintergrundfarbe
 	private Color bgcolor = Color.BLACK;
 	
-	/**
-	 * Es folgen die programmbezogenen Komponenten
-	 */
+	// Es folgen die programmbezogenen Komponenten
 	private BalkenPanel[] 	spieler 	= new BalkenPanel[3];
 	private ErgebnisPanel	ergebnis 	= null;
 	private BallPanel 		ball 	 	= null;
 	
+	// Threads
 	public  Thread 			ballThread  	= null;
 	public  Thread 			spieler1Thread  = null;
 	public  Thread 			spieler2Thread  = null;
 	
+	// Abstand der Balken vom Rand
 	public int BalkenPanelAbstand = 20;
 	
+	/**
+	 * Konstruktor des FensterFrames mit Übergabe der View
+	 * 
+	 * @param view
+	 */
 	public FensterFrame(View view) {
 		
 		super();
@@ -48,6 +60,9 @@ public class FensterFrame extends JFrame implements KeyListener{
 		
 	}
 	
+	/**
+	 * Initialisierung des Fensters
+	 */
 	private void init(){
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -64,6 +79,12 @@ public class FensterFrame extends JFrame implements KeyListener{
 		addKeyListener(this);		
 	}
 	
+	/**
+	 * Initialisierung der Threads
+	 * - Ball
+	 * - Spieler 1 Balken
+	 * - Spieler 2 Balken
+	 */
 	private void initThreads(){
 		
 		this.ballThread = new Thread(this.getBall());
@@ -77,6 +98,9 @@ public class FensterFrame extends JFrame implements KeyListener{
 		
 	}
 	
+	/**
+	 * Hinzufügen der Komponenten zum Fenster
+	 */
 	private void hinzufuegenElemente(){
 		
 		this.spieler[1] = new BalkenPanel(this, KeyEvent.VK_W, KeyEvent.VK_S);
@@ -97,7 +121,22 @@ public class FensterFrame extends JFrame implements KeyListener{
 		
 	}
 
-	private void neuesSpiel(){
+	/**
+	 * Starten eines neuen Spiels
+	 */
+	public void neuesSpiel(){
+		
+		this.ball.init();
+		
+		this.ballThread = new Thread(this.getBall());
+		this.ballThread.start();
+		
+	}
+	
+	/**
+	 * Setz die View zurück
+	 */
+	public void resetView(){
 		
 		this.ball.init();
 		
@@ -108,10 +147,21 @@ public class FensterFrame extends JFrame implements KeyListener{
 		
 	}
 	
+	/**
+	 * Gibt die View zurück
+	 * 
+	 * @return
+	 */
 	public View getView() {
 		return this.view;
 	}
 	
+	/**
+	 * Gibt den Spieler zurück
+	 * 
+	 * @param spieler
+	 * @return Spieler
+	 */
 	public BalkenPanel getSpieler(int spieler) {
 		
 		if(spieler == 1){
@@ -129,26 +179,45 @@ public class FensterFrame extends JFrame implements KeyListener{
 		}
 	}
 
+	/**
+	 * Gibt das Ergebnispanel zurück
+	 * 
+	 * @return
+	 */
 	public ErgebnisPanel getErgebnis() {
 		return ergebnis;
 	}
 
+	/**
+	 * Gibt das BallPanel zurück
+	 * 
+	 * @return
+	 */
 	public BallPanel getBall() {
 		return ball;
 	}
 
+	/**
+	 * Wird aufgerufen wenn eine Tastegedrückt wird
+	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
 		this.getSpieler(1).pressed(e.getKeyCode());
 		this.getSpieler(2).pressed(e.getKeyCode());
 	}
 
+	/**
+	 * Wird aufgerufen wenn eine gedrückte Taste losgelassen wird
+	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
 		this.getSpieler(1).released();
 		this.getSpieler(2).released();
 	}
 
+	/**
+	 * Wird aufgerufen wenn eine Taste getippt wurde
+	 */
 	@Override
 	public void keyTyped(KeyEvent e) {
 		
