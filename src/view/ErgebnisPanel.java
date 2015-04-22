@@ -6,6 +6,12 @@ import java.awt.Font;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+/**
+ * Klasse ErgebnisPanel - Anzeige des Ergebnisstandes auf der Oberfläche
+ * 
+ * @author		C.Teipen
+ * @version		22.04.2015
+ */
 public class ErgebnisPanel extends JPanel {
 
 	private static final long serialVersionUID = 1L;
@@ -26,6 +32,9 @@ public class ErgebnisPanel extends JPanel {
 	private Color farbe = Color.WHITE;
 	private String schrift = "Arial";
 	
+	/**
+	 * Konstruktor des ErgebnisPanels
+	 */
 	public ErgebnisPanel() {
 		
 		super();
@@ -33,6 +42,9 @@ public class ErgebnisPanel extends JPanel {
 
 	}
 	
+	/**
+	 * Initialisierung des Panels
+	 */
 	private void init(){
 		
 		this.setBackground(bgcolor);
@@ -44,6 +56,12 @@ public class ErgebnisPanel extends JPanel {
 				
 	}
 
+	/**
+	 * Gibt das Label mit dem Punktestand des Spielers zurück
+	 * 
+	 * @param spieler
+	 * @return Label
+	 */
 	public JLabel getErg(int spieler) {
 		
 		if(this.erg[spieler] == null){
@@ -57,6 +75,11 @@ public class ErgebnisPanel extends JPanel {
 		return this.erg[spieler];
 	}
 
+	/**
+	 * Gibt das Label mit den Doppelpunkten zurück
+	 * 
+	 * @return Doppelpunkt Label
+	 */
 	public JLabel getDoppel() {
 		
 		if(doppel == null){
