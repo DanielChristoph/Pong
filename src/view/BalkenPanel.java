@@ -29,8 +29,8 @@ public class BalkenPanel extends JPanel implements Runnable{
 	// Label mit Hintergrundbild
 	private JLabel bgpic = null;
 	
-	// Schrittweite und sein Standardwert
 	private int defaultSchritt = 10;
+	// Schrittweite und sein Standardwert
 	private int schrittweite = 0;
 	
 	// Tastenbelegung
@@ -65,7 +65,6 @@ public class BalkenPanel extends JPanel implements Runnable{
 	 * Initialisierung der Farbe und Größe
 	 */
 	public void init(int spieler){
-		
 		this.setBackground(this.farbe);
 		this.setSize(this.breite, this.hoehe);
 		
@@ -95,11 +94,11 @@ public class BalkenPanel extends JPanel implements Runnable{
 		
 		// Wenn hoch und noch nicht oben angelangt
 		if(this.schrittweite < 0 && this.getY() > 0)
-		this.setLocation(this.getX(), this.getY() + this.schrittweite);
+			this.setLocation(this.getX(), this.getY() + this.schrittweite);
 		
 		// Wenn runter und noch nicht unten angelangt
 		if(this.schrittweite > 0 && this.getY() + this.getHeight() < this.fenster.getHeight() - this.wai)
-		this.setLocation(this.getX(), this.getY() + this.schrittweite);
+			this.setLocation(this.getX(), this.getY() + this.schrittweite);
 		
 	}
 	
@@ -108,18 +107,18 @@ public class BalkenPanel extends JPanel implements Runnable{
 	 * Ruft sich danach selber auf
 	 */
 	public void bewegen(){
-		
-		try {
-			Thread.sleep(10);
-		} catch (InterruptedException e) {
-			System.out.println("Balken sleep fail");
+		if(!this.fenster.isPausiert()) {
+			try {
+				Thread.sleep(10);
+			} catch (InterruptedException e) {
+				System.out.println("Balken sleep fail");
+			}
+			
+			if(this.schrittweite != 0)
+				this.bewegeBalken();	
+			
+			this.bewegen();
 		}
-		
-		if(this.schrittweite != 0)
-			this.bewegeBalken();
-		
-		this.bewegen();
-		
 	}
 	
 	/**
@@ -154,9 +153,8 @@ public class BalkenPanel extends JPanel implements Runnable{
 	 */
 	@Override
 	public void run() {
-
+		
 		this.bewegen();
 		
 	}
-	
 }

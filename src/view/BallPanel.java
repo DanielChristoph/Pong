@@ -38,6 +38,8 @@ public class BallPanel extends JPanel implements Runnable{
 	// Was auch immer - Abstand von Oben
 	private int wai = 29;
 	
+	private int lastDirection = 4;
+	
 	/**
 	 * Konstruktor des Balls mit Übergabe des Fensters in dem er dargestellt wird
 	 * 
@@ -58,7 +60,6 @@ public class BallPanel extends JPanel implements Runnable{
 	 * Inistialisiert den Ball
 	 */
 	public void init(){
-		
 		this.setSize(groesse, groesse);
 		
 		Random rand = new Random();
@@ -85,31 +86,38 @@ public class BallPanel extends JPanel implements Runnable{
 	 * @param richtung
 	 */
 	public void move(int richtung){
-		
-		try {
-			Thread.sleep(pause);
-		} catch (InterruptedException e) {
-			System.out.println("Ball sleep fail");
-		}
-		
-		switch(richtung){
-		
-			case 0:	moveOL();
-					break;
-					
-			case 1:	moveOR();
-					break;
-
-			case 2:	moveUL();	
-					break;
-					
-			case 3:	moveUR();
-					break;
-					
-			default: break;
+		if(!this.fenster.isPausiert()) {
+			if(this.lastDirection != 4) {
+				richtung = lastDirection;
+				lastDirection = 4;
+			}
 			
+			try {
+				Thread.sleep(pause);
+			} catch (InterruptedException e) {
+				System.out.println("Ball sleep fail");
+			}
+			
+			switch(richtung){
+			
+				case 0:	moveOL();
+						break;
+						
+				case 1:	moveOR();
+						break;
+	
+				case 2:	moveUL();	
+						break;
+						
+				case 3:	moveUR();
+						break;
+						
+				default: break;
+				
+			}
+		} else {
+			this.lastDirection = richtung;
 		}
-		
 	}
 	
 	/**
@@ -252,6 +260,7 @@ public class BallPanel extends JPanel implements Runnable{
 				this.fenster.getErgebnis().getErg(spieler).setText(this.fenster.getView().getPresenter().getPunkte(spieler) + "");
 				
 				this.fenster.ballThread.interrupt();
+				this.fenster.setPausiertDurchPunkt(true);
 				
 				return false;
 				
@@ -269,8 +278,9 @@ public class BallPanel extends JPanel implements Runnable{
 	 */
 	@Override
 	public void run() {
-
+		
 		Random rand = new Random();
+		
 		this.move(rand.nextInt(3));
 		
 	}

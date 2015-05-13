@@ -44,6 +44,9 @@ public class FensterFrame extends JFrame implements KeyListener{
 	// Abstand der Balken vom Rand
 	public int BalkenPanelAbstand = 20;
 	
+	private boolean pausiert = false;
+	private boolean pausiertDurchPunkt = false;
+	
 	/**
 	 * Konstruktor des FensterFrames mit Übergabe der View
 	 * 
@@ -130,7 +133,7 @@ public class FensterFrame extends JFrame implements KeyListener{
 
 		this.ballThread = new Thread(this.getBall());
 		this.ballThread.start();
-		
+		this.pausiertDurchPunkt = false;
 	}
 	
 	/**
@@ -138,11 +141,12 @@ public class FensterFrame extends JFrame implements KeyListener{
 	 */
 	public void neueSpielrunde(){
 		
+		this.pausiertDurchPunkt = false;
 		this.ball.init();
 		
 		this.ballThread = new Thread(this.getBall());
 		this.ballThread.start();
-		
+
 	}
 	
 	/**
@@ -200,6 +204,25 @@ public class FensterFrame extends JFrame implements KeyListener{
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
+		
+		if(e.getKeyCode() == 27){
+			
+			if(!this.pausiert){
+				
+				if(!this.pausiertDurchPunkt){
+					
+					this.pauseGame();
+					
+				}
+				
+			}else{
+				
+				this.resumeGame();
+				
+			}
+				
+		}
+		
 		this.getSpieler(1).pressed(e.getKeyCode());
 		this.getSpieler(2).pressed(e.getKeyCode());
 	}
@@ -217,12 +240,45 @@ public class FensterFrame extends JFrame implements KeyListener{
 	 * Wird aufgerufen wenn eine Taste getippt wurde
 	 */
 	@Override
-	public void keyTyped(KeyEvent e) {
-		
-		if(!ballThread.isAlive() && e.getKeyChar() == ' ')
+	public void keyTyped(KeyEvent e) {	
+		if(!ballThread.isAlive() && e.getKeyChar() == ' ' && this.pausiertDurchPunkt)
 			this.neueSpielrunde();
 		
+	}	
+	
+	private void pauseGame() {
+		this.pausiert = true;
 	}
+	
+	private void resumeGame() {
 		
+		this.pausiert = false;
+		
+		this.ballThread = new Thread(this.getBall());
+		this.ballThread.start();
+		
+		this.spieler1Thread = new Thread(this.getSpieler(1));
+		this.spieler1Thread.start();
+		
+		this.spieler2Thread = new Thread(this.getSpieler(2));
+		this.spieler2Thread.start();
+	}
+
+	public boolean isPausiert() {
+		return pausiert;
+	}
+
+	public void setPausiert(boolean pausiert) {
+		this.pausiert = pausiert;
+	}
+
+	public boolean isPausiertDurchPunkt() {
+		return pausiertDurchPunkt;
+	}
+
+	public void setPausiertDurchPunkt(boolean pausiertDurchPunkt) {
+		this.pausiertDurchPunkt = pausiertDurchPunkt;
+	}
+	
 	
 }
