@@ -2,6 +2,8 @@ package view;
 
 import java.awt.Color;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -22,7 +24,10 @@ public class BalkenPanel extends JPanel implements Runnable{
 	private int hoehe = 100;
 	
 	// Panel Farbe
-	private Color farbe = Color.WHITE;
+	private Color farbe = Color.BLACK;
+	
+	// Label mit Hintergrundbild
+	private JLabel bgpic = null;
 	
 	// Schrittweite und sein Standardwert
 	private int defaultSchritt = 10;
@@ -63,6 +68,13 @@ public class BalkenPanel extends JPanel implements Runnable{
 		
 		this.setBackground(this.farbe);
 		this.setSize(this.breite, this.hoehe);
+		
+		ImageIcon bg = new ImageIcon("balken.png");
+		this.bgpic = new JLabel(bg);
+		this.bgpic.setBounds(1, -(this.hoehe / 2), this.breite, this.hoehe);
+		this.bgpic.setBackground(this.farbe);
+		
+		this.add(bgpic);
 		
 		if(spieler == 1){
 			

@@ -3,6 +3,8 @@ package view;
 import java.awt.Color;
 import java.util.Random;
 
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -19,10 +21,13 @@ public class BallPanel extends JPanel implements Runnable{
 	private FensterFrame fenster = null;
 	
 	// Farbe des Balls
-	private Color farbe = Color.WHITE;
+	private Color farbe = Color.BLACK;
+	
+	// Hintergundbild für den Ball
+	private JLabel bgpic = null;
 	
 	// Da quadratisch nur eine Längenangabe
-	private int groesse = 20;
+	private int groesse = 30;
 	
 	// Pause die nach jedem Schritt vom Ball gemacht wird
 	private int pause = 25;
@@ -59,6 +64,13 @@ public class BallPanel extends JPanel implements Runnable{
 		Random rand = new Random();
 		this.setLocation((this.fenster.getWidth() / 2) - (this.getWidth() / 2), 
 				rand.nextInt(this.fenster.getHeight() - this.getHeight()) + this.getHeight());
+		
+		ImageIcon bg = new ImageIcon("ball.png");
+		this.bgpic = new JLabel(bg);
+		this.bgpic.setBounds(0, 0, this.getWidth(), this.getHeight());
+		this.add(bgpic);
+		
+		this.bgpic.setBackground(this.farbe);
 		
 	}
 	
