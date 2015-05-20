@@ -9,8 +9,9 @@ import java.sql.Statement;
 public class dbconnection {
 	
 	Connection conn = null;
+	ResultSet rs = null;
 	
-	public void openconn(){
+	public void openConn(){
 	    try {
 	    	Class.forName("org.sqlite.JDBC");
 	    	conn = DriverManager.getConnection("jdbc:sqlite:pong.sqlite");
@@ -21,9 +22,10 @@ public class dbconnection {
 		}
 	}
 	
-	public void closeconn(){
+	public void closeConn(){
 		try {
 			conn.close();
+			rs.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -31,7 +33,6 @@ public class dbconnection {
 	
 	public ResultSet getTop(){
 	    Statement stat;
-	    ResultSet rs = null;
 		try {
 			stat = conn.createStatement();
 			rs = stat.executeQuery("Select top 10 gamedif.* from gamedif");
@@ -45,7 +46,7 @@ public class dbconnection {
 		Statement stat;
 		try{
 			stat = conn.createStatement();
-			stat.executeUpdate("Insert into gameresults Values()");
+			stat.executeUpdate("Insert into gameresults (player1, player2, score1, score2) Values()");
 			//TODO
 		}catch(Exception e) {
 			e.printStackTrace();
