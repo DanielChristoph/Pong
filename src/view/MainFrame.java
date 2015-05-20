@@ -6,6 +6,7 @@ import java.awt.event.KeyListener;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  * Hauptfenster der GUI
@@ -13,7 +14,7 @@ import javax.swing.JFrame;
  * @author		C.Teipen
  * @version		22.04.2015
  */
-public class FensterFrame extends JFrame implements KeyListener{
+public class MainFrame extends JFrame implements KeyListener{
 
 	private static final long serialVersionUID = 8065773938646050109L;
 	
@@ -47,19 +48,21 @@ public class FensterFrame extends JFrame implements KeyListener{
 	private boolean pausiert = false;
 	private boolean pausiertDurchPunkt = false;
 	
+	private MenueFrame menue = null;
+	
 	/**
 	 * Konstruktor des FensterFrames mit Übergabe der View
 	 * 
 	 * @param view
 	 */
-	public FensterFrame(View view) {
+	public MainFrame(View view) {
 		
 		super();
 		this.view = view;
 		
 		init();
 		
-		initThreads();
+		//initThreads();
 		
 	}
 	
@@ -88,7 +91,7 @@ public class FensterFrame extends JFrame implements KeyListener{
 	 * - Spieler 1 Balken
 	 * - Spieler 2 Balken
 	 */
-	private void initThreads(){
+	public void initThreads(){
 		
 		this.ballThread = new Thread(this.getBall());
 		this.ballThread.start();
@@ -119,6 +122,8 @@ public class FensterFrame extends JFrame implements KeyListener{
 		this.ergebnis = new ErgebnisPanel();
 		this.add(this.ergebnis);
 		this.ergebnis.setLocation((this.WIDTH / 2) - (this.ergebnis.getWidth() / 2), 0);
+	
+		this.getMenue().setVisible(true);
 		
 	}
 
@@ -279,6 +284,21 @@ public class FensterFrame extends JFrame implements KeyListener{
 	public void setPausiertDurchPunkt(boolean pausiertDurchPunkt) {
 		this.pausiertDurchPunkt = pausiertDurchPunkt;
 	}
-	
-	
+
+	public MenueFrame getMenue() {
+		
+		if(menue == null){
+			
+			menue = new MenueFrame(this);
+			menue.setLocation(this.getX() + (this.getWidth() / 2) - (menue.getWidth() / 2), this.getY() + (this.getHeight() / 2) - (menue.getHeight() / 2));
+			menue.setAlwaysOnTop(true);
+			
+		}
+		
+		return menue;
+	}
+
+	public void setMenue(MenueFrame menue) {
+		this.menue = menue;
+	}
 }

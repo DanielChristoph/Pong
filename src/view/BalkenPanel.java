@@ -17,7 +17,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 	private static final long serialVersionUID = -3527165548569866458L;
 
 	// Fenster in dem der Balken angezeigt wird
-	private FensterFrame fenster = null;
+	private MainFrame fenster = null;
 	
 	// Höhe und Breite
 	private int breite = 20;
@@ -49,7 +49,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 	 * @param hoch
 	 * @param runter
 	 */
-	public BalkenPanel(FensterFrame fenster, int hoch, int runter, int spieler) {
+	public BalkenPanel(MainFrame fenster, int hoch, int runter, int spieler) {
 		
 		super();
 		
