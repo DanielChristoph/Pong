@@ -8,8 +8,8 @@ import java.sql.Statement;
 
 public class dbconnection {
 	
-	Connection conn = null;
-	ResultSet rs = null;
+	private Connection conn = null;
+	private ResultSet rs = null;
 	
 	public void openConn(){
 	    try {
