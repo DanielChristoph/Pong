@@ -14,7 +14,8 @@ public class dbconnection {
 	public void openConn(){
 	    try {
 	    	Class.forName("org.sqlite.JDBC");
-	    	conn = DriverManager.getConnection("jdbc:sqlite:pong.sqlite");
+	    	//TODO DB Pfad ist nicht immer gleich Lösung?!??
+	    	conn = DriverManager.getConnection("jdbc:sqlite: PATH");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (ClassNotFoundException e) {
@@ -42,12 +43,12 @@ public class dbconnection {
 		return rs;
 	}
 	
-	public void insertGameResult(){
+	public void insertGameResult(Result r){
 		Statement stat;
 		try{
 			stat = conn.createStatement();
-			stat.executeUpdate("Insert into gameresults (player1, player2, score1, score2) Values()");
-			//TODO
+			stat.executeUpdate("Insert into gameresults (player1, player2, score1, score2) Values('"+r.getPlayer1()+"','"+r.getPlayer2()+
+					"',"+r.getScore1()+","+r.getScore2()+")");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}

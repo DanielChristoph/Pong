@@ -85,6 +85,7 @@ public class Presenter {
 		getModel().getSpieler(spieler).sieg();
 		if (getModel().getSpieler(spieler).getPunkte() == 10) {
 			JOptionPane.showMessageDialog(null, getModel().getSpieler(spieler).getNickname() + " hat gewonnen", "Gewonnen", JOptionPane.INFORMATION_MESSAGE);
+			//TODO neue dbc + result Objekt, dbc.insertGameResult(result)
 			this.view.getFenster().neuesSpiel();
 			this.model.reset();
 			this.view.getFenster().getSpieler(1).init(1);
