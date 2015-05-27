@@ -80,7 +80,7 @@ public class MenueFrame extends JFrame {
 					fenster.getMenue().setAlwaysOnTop(false);
 					fenster.setVisible(false);
 					fenster = null;
-					
+					System.exit(10);
 				}
 			});
 		}

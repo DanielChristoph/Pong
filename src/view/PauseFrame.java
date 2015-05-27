@@ -79,7 +79,7 @@ public class PauseFrame extends JFrame {
 					fenster.getPauseFrame().setAlwaysOnTop(false);
 					fenster.setVisible(false);
 					fenster = null;
-					
+					System.exit(10);
 				}
 			});
 		}
