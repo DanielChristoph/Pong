@@ -18,7 +18,7 @@ public class dbconnection {
 	/**
 	 * Öffnet die Datenbankverbindung
 	 */
-	public void openConn(){
+	private void openConn(){
 	    try {
 	    	Class.forName("org.sqlite.JDBC");
 	    	//TODO DB Pfad ist nicht immer gleich Lösung?!??
@@ -32,7 +32,7 @@ public class dbconnection {
 	/**
 	 * Schließt die Datenbankverbindung
 	 */
-	public void closeConn(){
+	private void closeConn(){
 		try {
 			conn.close();
 		} catch (SQLException e) {
@@ -45,13 +45,15 @@ public class dbconnection {
 	 * @return rs
 	 */
 	public ResultSet getTop(){
+		this.openConn();
 	    Statement stat;
 		try {
 			stat = conn.createStatement();
-			rs = stat.executeQuery("Select top 10 gamedif.* from gamedif");
+			rs = stat.executeQuery("Select * from gamedif");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		this.closeConn();
 		return rs;
 	}
 	
@@ -61,6 +63,7 @@ public class dbconnection {
 	 * @param r
 	 */
 	public void insertGameResult(Result r){
+		this.openConn();
 		Statement stat;
 		try{
 			stat = conn.createStatement();
@@ -69,6 +72,7 @@ public class dbconnection {
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		this.closeConn();
 	}
 }
 

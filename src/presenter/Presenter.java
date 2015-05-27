@@ -4,6 +4,8 @@ import javax.swing.JOptionPane;
 
 import model.Model;
 import view.View;
+import connection.Result;
+import connection.dbconnection;
 
 /**
  * Klasse Presenter
@@ -86,6 +88,17 @@ public class Presenter {
 		if (getModel().getSpieler(spieler).getPunkte() == 10) {
 			JOptionPane.showMessageDialog(null, getModel().getSpieler(spieler).getNickname() + " hat gewonnen", "Gewonnen", JOptionPane.INFORMATION_MESSAGE);
 			//TODO neue dbc + result Objekt, dbc.insertGameResult(result)
+			dbconnection dbc = new dbconnection();
+			int spieler2 = 0;
+			if(spieler == 1)
+				spieler2 = 2;
+			else 
+				spieler2 = 1;
+			Result r = new Result(getModel().getSpieler(spieler).getNickname(),
+					getModel().getSpieler(spieler2).getNickname(),
+					getModel().getSpieler(spieler).getPunkte(),
+					getModel().getSpieler(spieler2).getPunkte());
+			dbc.insertGameResult(r);
 			this.view.getFenster().neuesSpiel();
 			this.model.reset();
 			this.view.getFenster().getSpieler(1).init(1);
