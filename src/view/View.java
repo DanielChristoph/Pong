@@ -6,7 +6,7 @@ public class View {
 
 	private Presenter presenter = null;
 	
-	private FensterFrame fenster = null;
+	private MainFrame fenster = null;
 	
 	public View() {
 		
@@ -25,10 +25,10 @@ public class View {
 	
 	}
 	
-	public FensterFrame getFenster() {
+	public MainFrame getFenster() {
 		
 		if(this.fenster == null){
-			this.fenster = new FensterFrame(this);
+			this.fenster = new MainFrame(this);
 		}
 		
 		return fenster;

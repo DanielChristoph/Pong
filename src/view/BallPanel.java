@@ -18,7 +18,7 @@ public class BallPanel extends JPanel implements Runnable{
 	private static final long serialVersionUID = -4071397231696900457L;
 
 	// Fenster in dem der Balken angezeigt wird
-	private FensterFrame fenster = null;
+	private MainFrame fenster = null;
 	
 	// Farbe des Balls
 	private Color farbe = Color.BLACK;
@@ -45,7 +45,7 @@ public class BallPanel extends JPanel implements Runnable{
 	 * 
 	 * @param fenster
 	 */
-	public BallPanel(FensterFrame fenster) {
+	public BallPanel(MainFrame fenster) {
 		
 		super();
 		
