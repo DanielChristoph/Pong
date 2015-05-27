@@ -54,7 +54,8 @@ public class MenueFrame extends JFrame {
 					
 					fenster.getMenue().setVisible(false);
 					fenster.getMenue().setAlwaysOnTop(false);
-					fenster.initThreads();
+					//fenster.initThreads();
+					fenster.getNameFrame().setVisible(true);
 				}
 			});
 		}

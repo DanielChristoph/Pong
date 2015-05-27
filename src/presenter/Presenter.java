@@ -71,7 +71,7 @@ public class Presenter {
 	 * 
 	 * @return
 	 */
-	private Model getModel() {
+	public Model getModel() {
 		
 		return this.model;
 		

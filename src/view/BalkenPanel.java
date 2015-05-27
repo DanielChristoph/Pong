@@ -29,6 +29,8 @@ public class BalkenPanel extends JPanel implements Runnable{
 	// Label mit Hintergrundbild
 	private JLabel bgpic = null;
 	
+	private String name = null;
+	
 	private int defaultSchritt = 10;
 	// Schrittweite und sein Standardwert
 	private int schrittweite = 0;
