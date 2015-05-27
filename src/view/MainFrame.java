@@ -49,6 +49,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	private boolean pausiertDurchPunkt = false;
 	
 	private MenueFrame menue = null;
+	private PauseFrame pauseFrame = null;
 	
 	/**
 	 * Konstruktor des FensterFrames mit Übergabe der View
@@ -217,7 +218,7 @@ public class MainFrame extends JFrame implements KeyListener{
 				if(!this.pausiertDurchPunkt){
 					
 					this.pauseGame();
-					
+					this.getPauseFrame().setVisible(true);;
 				}
 				
 			}else{
@@ -251,11 +252,11 @@ public class MainFrame extends JFrame implements KeyListener{
 		
 	}	
 	
-	private void pauseGame() {
+	public void pauseGame() {
 		this.pausiert = true;
 	}
 	
-	private void resumeGame() {
+	public void resumeGame() {
 		
 		this.pausiert = false;
 		
@@ -296,6 +297,17 @@ public class MainFrame extends JFrame implements KeyListener{
 		}
 		
 		return menue;
+	}
+	
+	public PauseFrame getPauseFrame(){
+		
+		if(pauseFrame == null) {
+			pauseFrame = new PauseFrame(this);
+			pauseFrame.setLocation(this.getX() + (this.getWidth() / 2) - (pauseFrame.getWidth() / 2), this.getY() + (this.getHeight() /2) - (pauseFrame.getHeight() / 2));
+			pauseFrame.setAlwaysOnTop(true);
+		}
+		
+		return pauseFrame;
 	}
 
 	public void setMenue(MenueFrame menue) {
