@@ -58,6 +58,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	private MenueFrame menue = null;
 	private PauseFrame pauseFrame = null;
 	private NameFrame nameFrame = null;
+	private RankingFrame rankingFrame = null;
 	
 	/**
 	 * Konstruktor des FensterFrames mit Übergabe der View
@@ -329,6 +330,16 @@ public class MainFrame extends JFrame implements KeyListener{
 		}
 		
 		return this.nameFrame;
+	}
+	
+	public RankingFrame getRankingFrame() {
+		if(this.rankingFrame == null) {
+			this.rankingFrame = new RankingFrame(this);
+			this.rankingFrame.setLocation(this.getX() + (this.getWidth() / 2) - (rankingFrame.getWidth() / 2), this.getY() + (this.getHeight() /2) - (rankingFrame.getHeight() / 2));
+			this.rankingFrame.setAlwaysOnTop(true);
+		}
+		
+		return this.rankingFrame;
 	}
 	
 	public JLabel getLabelNameSpieler1() {

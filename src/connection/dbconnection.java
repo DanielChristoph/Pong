@@ -32,7 +32,7 @@ public class dbconnection {
 	/**
 	 * Schlieﬂt die Datenbankverbindung
 	 */
-	private void closeConn(){
+	public void closeConn(){
 		try {
 			conn.close();
 		} catch (SQLException e) {
@@ -49,11 +49,18 @@ public class dbconnection {
 	    Statement stat;
 		try {
 			stat = conn.createStatement();
-			rs = stat.executeQuery("Select * from gamedif");
+			rs = stat.executeQuery("select * from gamedif order by Punktedifferenz desc");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		this.closeConn();
+//		try {
+//			while(rs.next()){
+//				System.out.println(rs.getString("Spieler").toString() + rs.getInt("Punktedifferenz"));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		this.closeConn();
 		return rs;
 	}
 	
