@@ -23,10 +23,10 @@ public class BallPanel extends JPanel implements Runnable{
 	// Farbe des Balls
 	private Color farbe = Color.BLACK;
 	
-	// Hintergundbild für den Ball
+	// Hintergundbild fï¿½r den Ball
 	private JLabel bgpic = null;
 	
-	// Da quadratisch nur eine Längenangabe
+	// Da quadratisch nur eine Lï¿½ngenangabe
 	private int groesse = 30;
 	
 	// Pause die nach jedem Schritt vom Ball gemacht wird
@@ -41,7 +41,7 @@ public class BallPanel extends JPanel implements Runnable{
 	private int lastDirection = 4;
 	
 	/**
-	 * Konstruktor des Balls mit Übergabe des Fensters in dem er dargestellt wird
+	 * Konstruktor des Balls mit ï¿½bergabe des Fensters in dem er dargestellt wird
 	 * 
 	 * @param fenster
 	 */
@@ -66,7 +66,7 @@ public class BallPanel extends JPanel implements Runnable{
 		this.setLocation((this.fenster.getWidth() / 2) - (this.getWidth() / 2), 
 				rand.nextInt(this.fenster.getHeight() - this.getHeight()) + this.getHeight());
 		
-		ImageIcon bg = new ImageIcon("ball.png");
+		ImageIcon bg = new ImageIcon("res/ball.png");
 		this.bgpic = new JLabel(bg);
 		this.bgpic.setBounds(0, 0, this.getWidth(), this.getHeight());
 		this.add(bgpic);
@@ -233,11 +233,11 @@ public class BallPanel extends JPanel implements Runnable{
 	}
 
 	/**
-	 * Überprüft ob der Ball einen Spielerbalken berührt hat, oder ob die Spielrunde vorbei ist
+	 * ï¿½berprï¿½ft ob der Ball einen Spielerbalken berï¿½hrt hat, oder ob die Spielrunde vorbei ist
 	 * Wenn die Spielrunde vorbei ist bekommt der Spieler der gewonnen hat einen Punkt
 	 * 
-	 * @param	spieler - Balken der berührt worden sein soll
-	 * @return	Hat der Ball den Balken berührt?
+	 * @param	spieler - Balken der berï¿½hrt worden sein soll
+	 * @return	Hat der Ball den Balken berï¿½hrt?
 	 */
 	private boolean balkenBeruehrt(int spieler){
 		
@@ -273,8 +273,8 @@ public class BallPanel extends JPanel implements Runnable{
 	}
 	
 	/**
-	 * Bewegt den Ball permanent auf der Oberfläche bis der Thread gestoppt wurde
-	 * Startrichtung wird zufällig gewählt
+	 * Bewegt den Ball permanent auf der Oberflï¿½che bis der Thread gestoppt wurde
+	 * Startrichtung wird zufï¿½llig gewï¿½hlt
 	 */
 	@Override
 	public void run() {

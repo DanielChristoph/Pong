@@ -70,7 +70,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 		this.setBackground(this.farbe);
 		this.setSize(this.breite, this.hoehe);
 		
-		ImageIcon bg = new ImageIcon("balken.png");
+		ImageIcon bg = new ImageIcon("res/balken.png");
 		this.bgpic = new JLabel(bg);
 		this.bgpic.setBounds(1, -(this.hoehe / 2), this.breite, this.hoehe);
 		this.bgpic.setBackground(this.farbe);
