@@ -7,7 +7,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Klasse BalkenPanel - Spielbalken der Oberfläche
+ * Klasse BalkenPanel - Spielbalken der Oberflï¿½che
  * 
  * @author		C.Teipen
  * @version		22.04.2015
@@ -19,7 +19,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 	// Fenster in dem der Balken angezeigt wird
 	private MainFrame fenster = null;
 	
-	// Höhe und Breite
+	// Hï¿½he und Breite
 	private int breite = 20;
 	private int hoehe = 100;
 	
@@ -29,7 +29,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 	// Label mit Hintergrundbild
 	private JLabel bgpic = null;
 	
-	private int defaultSchritt = 10;
+	private int defaultSchritt = 25;
 	// Schrittweite und sein Standardwert
 	private int schrittweite = 0;
 	
@@ -62,7 +62,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 	}
 	
 	/**
-	 * Initialisierung der Farbe und Größe
+	 * Initialisierung der Farbe und Grï¿½ï¿½e
 	 */
 	public void init(int spieler){
 		this.setBackground(this.farbe);
@@ -88,7 +88,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 	}
 	
 	/**
-	 * Bewegt den Balken abhängig von der Variable <code>schrittweite</code>
+	 * Bewegt den Balken abhï¿½ngig von der Variable <code>schrittweite</code>
 	 */
 	private void bewegeBalken(){
 		
@@ -107,25 +107,37 @@ public class BalkenPanel extends JPanel implements Runnable{
 	 * Ruft sich danach selber auf
 	 */
 	public void bewegen(){
+		
 		if(!this.fenster.isPausiert()) {
+			
 			try {
-				Thread.sleep(10);
+			
+				Thread.sleep(25);
+				
+				if(this.schrittweite != 0)
+					this.bewegeBalken();	
+				
+				this.bewegen();
+
 			} catch (InterruptedException e) {
+				
 				System.out.println("Balken sleep fail");
+				
+			} catch (Exception e) {
+				
+				System.out.println("Balken ultra fail: " + e.getMessage());
+				
 			}
 			
-			if(this.schrittweite != 0)
-				this.bewegeBalken();	
-			
-			this.bewegen();
 		}
+		
 	}
 	
 	/**
-	 * Die übergebene Taste bestimmt den Wert den <code>schrittweite</code> bekommt.
-	 * Dieser überprüft ob <code>hoch</code> oder <code>runter</code> gedrückt wurde.
+	 * Die ï¿½bergebene Taste bestimmt den Wert den <code>schrittweite</code> bekommt.
+	 * Dieser ï¿½berprï¿½ft ob <code>hoch</code> oder <code>runter</code> gedrï¿½ckt wurde.
 	 * 
-	 * @param taste - gedrückte Taste
+	 * @param taste - gedrï¿½ckte Taste
 	 */
 	public void pressed(int taste){
 		
@@ -140,7 +152,7 @@ public class BalkenPanel extends JPanel implements Runnable{
 	}
 	
 	/**
-	 * Aufruf beim loslassen der gedrückten Taste
+	 * Aufruf beim loslassen der gedrï¿½ckten Taste
 	 */
 	public void released(){
 		
@@ -149,12 +161,24 @@ public class BalkenPanel extends JPanel implements Runnable{
 	}
 
 	/**
-	 * Der Balken bewegt sich durchgängig. Es variiert nur die <code>schrittweite</code>.
+	 * Der Balken bewegt sich durchgï¿½ngig. Es variiert nur die <code>schrittweite</code>.
 	 */
 	@Override
 	public void run() {
 		
 		this.bewegen();
+		
+	}
+	
+	public int getHoch(){
+		
+		return this.hoch;
+		
+	}
+	
+	public int getRunter(){
+		
+		return this.runter;
 		
 	}
 }
