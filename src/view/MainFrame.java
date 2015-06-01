@@ -26,7 +26,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	// Titel
 	private String titel = "Pong - XBOX";
 	
-	// Höhe und Breite
+	// Hï¿½he und Breite
 	private int HEIGHT 	= 600;
 	private int WIDTH 	= 800;
 	private int POSITION = 100;
@@ -61,7 +61,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	private RankingFrame rankingFrame = null;
 	
 	/**
-	 * Konstruktor des FensterFrames mit Übergabe der View
+	 * Konstruktor des FensterFrames mit ï¿½bergabe der View
 	 * 
 	 * @param view
 	 */
@@ -115,7 +115,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	}
 	
 	/**
-	 * Hinzufügen der Komponenten zum Fenster
+	 * Hinzufï¿½gen der Komponenten zum Fenster
 	 */
 	private void hinzufuegenElemente(){
 		
@@ -168,7 +168,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	}
 	
 	/**
-	 * Gibt die View zurück
+	 * Gibt die View zurï¿½ck
 	 * 
 	 * @return
 	 */
@@ -177,7 +177,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	}
 	
 	/**
-	 * Gibt den Spieler zurück
+	 * Gibt den Spieler zurï¿½ck
 	 * 
 	 * @param spieler
 	 * @return Spieler
@@ -200,7 +200,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	}
 
 	/**
-	 * Gibt das Ergebnispanel zurück
+	 * Gibt das Ergebnispanel zurï¿½ck
 	 * 
 	 * @return
 	 */
@@ -209,7 +209,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	}
 
 	/**
-	 * Gibt das BallPanel zurück
+	 * Gibt das BallPanel zurï¿½ck
 	 * 
 	 * @return
 	 */
@@ -218,7 +218,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	}
 
 	/**
-	 * Wird aufgerufen wenn eine Tastegedrückt wird
+	 * Wird aufgerufen wenn eine Tastegedrï¿½ckt wird
 	 */
 	@Override
 	public void keyPressed(KeyEvent e) {
@@ -246,7 +246,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	}
 
 	/**
-	 * Wird aufgerufen wenn eine gedrückte Taste losgelassen wird
+	 * Wird aufgerufen wenn eine gedrï¿½ckte Taste losgelassen wird
 	 */
 	@Override
 	public void keyReleased(KeyEvent e) {
@@ -259,7 +259,7 @@ public class MainFrame extends JFrame implements KeyListener{
 	 */
 	@Override
 	public void keyTyped(KeyEvent e) {	
-		if(!ballThread.isAlive() && e.getKeyChar() == ' ' && this.pausiertDurchPunkt)
+		if(ballThread != null && !ballThread.isAlive() && e.getKeyChar() == ' ' && this.pausiertDurchPunkt)
 			this.neueSpielrunde();
 		
 	}	

@@ -20,7 +20,7 @@ public class Presenter {
 	private Model model = null;
 	
 	/**
-	 * Konstruktor des Presenters mit Übergabe der View und des Models
+	 * Konstruktor des Presenters mit ï¿½bergabe der View und des Models
 	 * 
 	 * @param view
 	 * @param model
@@ -67,7 +67,7 @@ public class Presenter {
 	}
 	
 	/**
-	 * Gibt das Model zurück
+	 * Gibt das Model zurï¿½ck
 	 * 
 	 * @return
 	 */
@@ -78,7 +78,18 @@ public class Presenter {
 	}
 	
 	/**
-	 * Fügt einem Spieler einen Punkt hinzu für den Sieg
+	 * Gibt die GUI zurï¿½ck
+	 * 
+	 * @return
+	 */
+	public View getView() {
+		
+		return this.view;
+		
+	}
+	
+	/**
+	 * Fï¿½gt einem Spieler einen Punkt hinzu fï¿½r den Sieg
 	 * 
 	 * @param spieler
 	 */
@@ -107,7 +118,7 @@ public class Presenter {
 	}
 	
 	/**
-	 * Gibt die Punkte des Spielers zurück
+	 * Gibt die Punkte des Spielers zurï¿½ck
 	 * 
 	 * @param spieler
 	 * @return punkte

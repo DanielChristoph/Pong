@@ -3,6 +3,7 @@ package main;
 import presenter.Presenter;
 import model.Model;
 import view.View;
+import controller.*;
 
 /**
  * Main Klasse des Spiels
@@ -14,7 +15,7 @@ public class Pong {
 
 	/**
 	 * Main-Methode
-	 * Initialisierung und Verknüpfung von View, Model & Presenter
+	 * Initialisierung und Verknï¿½pfung von View, Model & Presenter
 	 * 
 	 * @param args
 	 */
@@ -24,6 +25,8 @@ public class Pong {
 		Model model = new Model();
 		
 		Presenter presenter = new Presenter(view, model);
+		
+		GamePad controller = new GamePad(presenter);
 		
 		presenter.startGame();
 		
