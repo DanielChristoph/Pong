@@ -42,7 +42,7 @@ public class GamePad {
 		try{
 			
 			System.load(System.getProperty("user.dir") + "\\jxinput.dll");
-			
+
 			JXInputEventManager.setTriggerIntervall( intervall );
 			
 			//System.out.println("Anzahl der Geräte: " + JXInputManager.getNumberOfDevices());
@@ -74,14 +74,13 @@ public class GamePad {
 			
 			}else{
             	
-            	//System.out.println("Es ist kein XBOX Controller angeschlossen. Programm wird beendet.");
-            	//System.exit(1);
+            	System.out.println("Es ist kein XBOX Controller angeschlossen.");
             	
             }
 		
 		}catch(Exception e){
 			
-			System.out.println(e.toString());
+			System.out.println("XBOX: " + e.toString());
 			
 		}
 		
