@@ -18,9 +18,10 @@ public class MenueFrame extends JFrame {
 	private MainFrame fenster = null;
 	
 	private JButton start = null;
+	private JButton top10 = null;
 	private JButton beenden = null;
 
-	private int HEIGHT2 	= 100;
+	private int HEIGHT2 	= 120;
 	private int WIDTH2 	= 100;
 	
 	public MenueFrame(MainFrame fenster) {
@@ -38,6 +39,7 @@ public class MenueFrame extends JFrame {
 		this.setLayout(new BorderLayout());
 				
 		this.add(BorderLayout.NORTH, this.getStart());
+		this.add(BorderLayout.CENTER, this.getTop10());
 		this.add(BorderLayout.SOUTH, this.getBeenden());
 	}
 	
@@ -54,7 +56,8 @@ public class MenueFrame extends JFrame {
 					
 					fenster.getMenue().setVisible(false);
 					fenster.getMenue().setAlwaysOnTop(false);
-					fenster.initThreads();
+					//fenster.initThreads();
+					fenster.getNameFrame().setVisible(true);
 				}
 			});
 		}
@@ -80,11 +83,31 @@ public class MenueFrame extends JFrame {
 					fenster.getMenue().setAlwaysOnTop(false);
 					fenster.setVisible(false);
 					fenster = null;
-					
+					System.exit(10);
 				}
 			});
 		}
 		
 		return beenden;
+	}
+	
+	public JButton getTop10() {
+		
+		if(this.top10 == null) {
+			this.top10 = new JButton();
+			this.top10.setText("Top 10 Spieler");
+			
+			this.top10.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					
+					fenster.getMenue().setVisible(false);
+					fenster.getMenue().setAlwaysOnTop(false);
+					fenster.getRankingFrame().setVisible(true);
+				}
+			});
+		}
+		
+		return top10;
 	}
 }

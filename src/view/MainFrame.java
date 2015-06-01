@@ -6,7 +6,9 @@ import java.awt.event.KeyListener;
 import java.util.concurrent.ArrayBlockingQueue;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  * Hauptfenster der GUI
@@ -28,7 +30,9 @@ public class MainFrame extends JFrame implements KeyListener{
 	private int HEIGHT 	= 600;
 	private int WIDTH 	= 800;
 	private int POSITION = 100;
-
+	private int WIDTH_OF_NAME_LABEL = 100;
+	private int HEIGHT_OF_NAME_LABEL = 20;
+	
 	// Hintergrundfarbe
 	private Color bgcolor = Color.BLACK;
 	
@@ -36,6 +40,9 @@ public class MainFrame extends JFrame implements KeyListener{
 	private BalkenPanel[] 	spieler 	= new BalkenPanel[3];
 	private ErgebnisPanel	ergebnis 	= null;
 	private BallPanel 		ball 	 	= null;
+	
+	private JLabel 	labelNameSpieler1 = null;
+	private JLabel	labelNameSpieler2 	= null;
 	
 	// Threads
 	public  Thread 			ballThread  	= null;
@@ -50,6 +57,8 @@ public class MainFrame extends JFrame implements KeyListener{
 	
 	private MenueFrame menue = null;
 	private PauseFrame pauseFrame = null;
+	private NameFrame nameFrame = null;
+	private RankingFrame rankingFrame = null;
 	
 	/**
 	 * Konstruktor des FensterFrames mit �bergabe der View
@@ -125,6 +134,9 @@ public class MainFrame extends JFrame implements KeyListener{
 		this.ergebnis.setLocation((this.WIDTH / 2) - (this.ergebnis.getWidth() / 2), 0);
 	
 		this.getMenue().setVisible(true);
+		
+		this.add(this.getLabelNameSpieler1());
+		this.add(this.getLabelNameSpieler2());
 		
 	}
 
@@ -308,6 +320,49 @@ public class MainFrame extends JFrame implements KeyListener{
 		}
 		
 		return pauseFrame;
+	}
+	
+	public NameFrame getNameFrame() {
+		if(this.nameFrame == null) {
+			this.nameFrame = new NameFrame(this);
+			this.nameFrame.setLocation(this.getX() + (this.getWidth() / 2) - (nameFrame.getWidth() / 2), this.getY() + (this.getHeight() /2) - (nameFrame.getHeight() / 2));
+			this.nameFrame.setAlwaysOnTop(true);
+		}
+		
+		return this.nameFrame;
+	}
+	
+	public RankingFrame getRankingFrame() {
+		if(this.rankingFrame == null) {
+			this.rankingFrame = new RankingFrame(this);
+			this.rankingFrame.setLocation(this.getX() + (this.getWidth() / 2) - (rankingFrame.getWidth() / 2), this.getY() + (this.getHeight() /2) - (rankingFrame.getHeight() / 2));
+			this.rankingFrame.setAlwaysOnTop(true);
+		}
+		
+		return this.rankingFrame;
+	}
+	
+	public JLabel getLabelNameSpieler1() {
+		if(this.labelNameSpieler1 == null) {
+			this.labelNameSpieler1 = new JLabel();
+			this.labelNameSpieler1.setSize(WIDTH_OF_NAME_LABEL, HEIGHT_OF_NAME_LABEL);
+			this.labelNameSpieler1.setLocation(1, 0);
+			this.labelNameSpieler1.setForeground(Color.WHITE);
+		}
+		
+		return this.labelNameSpieler1;
+	}
+	
+	public JLabel getLabelNameSpieler2() {
+		if(this.labelNameSpieler2 == null) {
+			this.labelNameSpieler2 = new JLabel();
+			this.labelNameSpieler2.setSize(WIDTH_OF_NAME_LABEL, HEIGHT_OF_NAME_LABEL);
+			this.labelNameSpieler2.setLocation(this.getWidth() - WIDTH_OF_NAME_LABEL - 8, 0);
+			this.labelNameSpieler2.setForeground(Color.WHITE);
+			this.labelNameSpieler2.setHorizontalAlignment(SwingConstants.RIGHT);
+		}
+		
+		return this.labelNameSpieler2;
 	}
 
 	public void setMenue(MenueFrame menue) {
