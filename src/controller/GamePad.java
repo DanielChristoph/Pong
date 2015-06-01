@@ -45,11 +45,11 @@ public class GamePad {
 			
 			JXInputEventManager.setTriggerIntervall( intervall );
 			
-			System.out.println("Anzahl der Geräte: " + JXInputManager.getNumberOfDevices());
+			//System.out.println("Anzahl der Geräte: " + JXInputManager.getNumberOfDevices());
 			
 			for(int i = 0; i < JXInputManager.getNumberOfDevices(); i++){
 	        	
-				System.out.println("Name: " + JXInputManager.getJXInputDevice(i).getName());
+				//System.out.println("Name: " + JXInputManager.getJXInputDevice(i).getName());
 				
 	            if(("Controller (XBOX 360 For Windows)").equals(JXInputManager.getJXInputDevice(i).getName())){
 	            	
@@ -61,7 +61,7 @@ public class GamePad {
 			
 			if(xbox != null){
 				
-				System.out.println("Unser Controller: " + getXbox().getName());
+				//System.out.println("Unser Controller: " + getXbox().getName());
 				
 				getButtonA();
 				getButtonB();
@@ -74,8 +74,8 @@ public class GamePad {
 			
 			}else{
             	
-            	System.out.println("Es ist kein XBOX Controller angeschlossen. Programm wird beendet.");
-            	System.exit(1);
+            	//System.out.println("Es ist kein XBOX Controller angeschlossen. Programm wird beendet.");
+            	//System.exit(1);
             	
             }
 		

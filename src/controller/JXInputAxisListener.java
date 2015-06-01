@@ -26,7 +26,7 @@ public class JXInputAxisListener implements JXInputAxisEventListener {
         @Override
         public void changed(JXInputAxisEvent arg0) {
             
-        	System.out.println( "Axis " + arg0.getAxis().getName() + " changed : value=" + arg0.getAxis().getValue() + ", event causing delta=" + arg0.getDelta() );
+        	//System.out.println( "Axis " + arg0.getAxis().getName() + " changed : value=" + arg0.getAxis().getValue() + ", event causing delta=" + arg0.getDelta() );
         	
         	if(arg0.getAxis().getName().equals("Y-Achse")){
             	
